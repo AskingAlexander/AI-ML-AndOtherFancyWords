@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ProductPlacementDemo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="ProductPlacementDemo.MainPage">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout x:Name="MainContainer" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+            <Frame BorderColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="10000">
+                <Label Text="Demo Time - Powered by EXE"/>
+            </Frame>
+            <AbsoluteLayout x:Name="ImageContainer" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Start"
+                            HeightRequest="400">
+                <ffimageloading:CachedImage x:Name="ImageDisplay"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            HeightRequest="400"/>
+            </AbsoluteLayout>
+            <StackLayout x:Name="Container" HorizontalOptions="Center" VerticalOptions="Center">
+                <ListView x:Name="ContentListView" ItemTapped="ContentListView_ItemTapped" HasUnevenRows="True" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ListItem">
+                            <ViewCell>
+                                <Frame CornerRadius="20" BackgroundColor="{Binding ItemColor}" BorderColor="Black" >
+                                    <StackLayout BackgroundColor="{Binding ItemColor}">
+                                        <Label Text="{Binding ItemName}" FontSize="Large" FontAttributes="Bold" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Pieces found: " FontSize="Medium" HorizontalOptions="Start"/>
+                                            <Label Text="{Binding ItemCount}" HorizontalOptions="End" FontSize="Medium" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="CameraButton"
+                        HeightRequest="90"
+                        WidthRequest="90"
+                        CornerRadius="45"
+                        Clicked="CameraButtonClicked"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="White"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Image="camera.png"/>
+            </StackLayout>
+        </StackLayout>
+        <ActivityIndicator x:Name="Indicator"
+                           Color="WhiteSmoke"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           IsRunning="False"/>
+    </Grid>
+
+</ContentPage>
